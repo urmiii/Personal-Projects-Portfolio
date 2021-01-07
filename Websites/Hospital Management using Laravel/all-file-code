@@ -1,0 +1,834 @@
+Lab#4 Develop a small project using Laravel framework.
+1.Code:
+Migration Files:
+2014_10_12_000000_create_users_table.php
+<?php
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
+
+2014_10_12_100000_create_password_resets_table
+<?php
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+class CreatePasswordResetsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+    }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('password_resets');
+    }
+}
+
+2019_08_20_022944_create_doctors_table.php
+<?php
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTableFile extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('doctors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');           
+            $table->string('op');
+            $table->integer('eid');
+            $table->timestamps();
+        });
+    }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('doctors');
+    }
+}
+
+2019_08_20_053456_create_patients_table.php
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePatientsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+         
+        Schema::create('patients', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('date');
+            $table->integer('doctor_id')->unsigned();
+            $table->timestamps();
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+             
+        });
+    }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('patients', function (Blueprint $table) {
+            $table->dropForeign(['doctor_eid']);
+        });
+        Schema::dropIfExists('patients');
+    }
+}
+Doctor.php
+<?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+class Doctor extends Model
+{
+    protected $fillable = ['name','nop','op','eid'];
+   public function patient(){   
+return $this->hasMany('App\Patient');  #access all the products of current company
+}
+}
+
+Patient.php
+<?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+class Patient extends Model
+{
+    protected $fillable = ['name','date','doctor_id'];
+public function doctor(){
+return $this->belongsTo('App\Doctor'); #access all the company of current product
+}
+}
+
+User.php
+<?php
+
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+}
+
+
+
+
+
+Web.php
+Route::get('/', 'ClientPatientController@welcome');
+Route::get('/patients', 'ClientPatientController@index')->name('patients');
+Route::get('/patients/{Doctor}/index', 'ClientPatientController@indexCat')-
+>name('patients.doctor');
+Route::get('/contact', 'ClientPatientController@contact')->name('contact');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/Patient/{Doctor}/index', 'PatientController@indexCat')-
+>name('patient.doctor');
+Route::resource('/Patient','PatientController');
+Route::resource('/Doctor','DoctorController');
+
+Controller.php
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+class Controller extends BaseController
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+}
+
+DoctorController.php
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Doctor;
+class DoctorController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(){
+        // $doctors = Doctor::latest()->paginate(5);
+        // $doctors = Doctor::withCount('patient')->get()
+        // $doctors = Doctor::withCount('patients')->orderBy('name','ASC')->paginate(3);
+// return view('Doctor.index',compact('doctors')) ->with('i', (request()->input('page',1) -1) 
+*5);
+        $doctors = Doctor::withCount('patient')->orderBy('name','ASC')->paginate(5);
+        return view('Doctor.index',compact('doctors'));
+}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('Doctor.create');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+'name' => 'required',
+'op' => 'required',
+'eid' => 'required']);
+Doctor::create($request->all());
+return redirect()->route('Doctor.index') ->with('success','new data created
+successfully');
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $doctor = Doctor::find($id);
+return view('Doctor.edit',compact('doctor'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+'name' => 'required',
+'op' => 'required' ,
+'eid' => 'required']);
+$doctor = Doctor::find($id);
+$doctor->name = $request->get('name');
+$doctor->op = $request->get('op');
+$doctor->eid = $request->get('eid');
+$doctor->save();
+return redirect()->route('Doctor.index') ->with('success','Updated successfully');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $doctor = Doctor::find($id);
+$doctor->delete();
+return redirect()->route('Doctor.index') ->with('success',' Data deleted
+successfully');
+    }
+}
+
+PatientController.php
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Patient;
+use App\Doctor;
+class PatientController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $patients = Patient::latest()->paginate(10);
+return view('Patient.index',compact('patients')) ->with('i', (request()->input('page',1) -1) *10);
+    }
+
+    public function indexCat($id)
+    {
+        $patients = Patient::with('doctor')->where('doctor_id',$id)->orderBy('name','ASC')-
+>paginate(4);
+        $doctor = Doctor::find($id);
+        return view('Doctor.index',compact('patients','doctor'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {        
+        $doctors = Doctor::all();
+         return view('Patient.create',compact('doctors'));
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+        'name' => 'required',
+        'date' => 'required',
+        'doctor_id' => 'required'
+        ]);
+        $patient = new Patient([
+          "name"=>$request->get('name'),
+          "date"=>$request->get('date'),
+          "doctor_id"=>$request->get('doctor_id')
+        ]);
+        $patient->save();
+        return redirect()->route('Patient.index') ->with('success','new data created
+successfully');
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $patient = Patient::find($id);
+        $doctors = Doctor::all();
+        return view('Patient.edit',compact('patient','doctors'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+'name' => 'required',
+'date' => 'required' ,
+'doctor_id' => 'required']);
+$patient = Patient::find($id);
+$patient->name = $request->get('name');
+$patient->date = $request->get('date');
+$patient->doctor_id = $request->get('doctor_id');
+$patient->save();
+return redirect()->route('Patient.index') ->with('success','Updated successfully');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $patient = Patient::find($id);
+$patient->delete();
+return redirect()->route('Patient.index') ->with('success',' Data deleted
+successfully');
+    }
+}
+
+ClientPatientController.php
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Patient;
+use App\Doctor;
+class ClientPatientController extends Controller
+{
+    public function welcome(Request $request){
+      return view('welcome');
+    }
+    public function contact(){
+      return view('contact');
+    }
+    public function index(){
+      $patients = Patient::with('doctor')->orderBy('name')->paginate(9);
+      $doctors = Doctor::orderBy('name')->get();
+      return view('patients',compact('patients','doctors'));
+    }
+    public function indexCat($id){
+      $patients = Patient::with('doctor')->where('doctor_id',$id)->orderBy('name')-
+>paginate(6);
+      $doctors = Doctor::orderBy('name')->get();
+      $curDoctor = Doctor::find($id);
+      return view('patients',compact('patients','doctors','curDoctor'));
+    }
+}
+
+HomeController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
+use Auth;
+use App\Patient;
+use App\Doctor;
+
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $doctor_count = Doctor::count();
+        $patient_count = Patient::count();
+        //return view('home',compact('company_count','product_count'));
+
+        session(['uname'=>Auth::user()->name]); // to set session variable using session helper
+        //$request->session()->put('uname',Auth::user()->name); // to set session variable
+        //$uname = session('uname'); // to get sesstion variable using session helper
+        //$uname = $request->session()->get('uname') // to get sesstion variable
+        //$uname = $request->session()->pull('uname') // to get and remove sesstion variable
+        //$uname = Session::get('uname'); // to get sesstion variable
+        $cookie = cookie('uname',Auth::user()->name,24*60); // to set cookie with value
+        //$uname = $request->cookie('uname'); // to get cookie value
+        //$uname = Cookie::get('uname'); // to get cookie value
+        $page = view('home',compact('doctor_count','patient_count'));
+        return Response($page)->cookie($cookie);
+    }
+}
+
+create.blade.php(patient)
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
+use Auth;
+use App\Patient;
+use App\Doctor;
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $doctor_count = Doctor::count();
+        $patient_count = Patient::count();
+        //return view('home',compact('company_count','product_count'));
+        session(['uname'=>Auth::user()->name]); // to set session variable using session 
+helper
+        //$request->session()->put('uname',Auth::user()->name); // to set session variable
+        //$uname = session('uname'); // to get sesstion variable using session helper
+        //$uname = $request->session()->get('uname') // to get sesstion variable
+        //$uname = $request->session()->pull('uname') // to get and remove sesstion variable
+        //$uname = Session::get('uname'); // to get sesstion variable
+        $cookie = cookie('uname',Auth::user()->name,24*60); // to set cookie with value
+        //$uname = $request->cookie('uname'); // to get cookie value
+        //$uname = Cookie::get('uname'); // to get cookie value
+        $page = view('home',compact('doctor_count','patient_count'));
+        return Response($page)->cookie($cookie);
+    }
+}
+
+index.blade.php(patient)
+@extends('layouts.app')
+@section('content')
+<div class="container">
+<div class="row">
+<div class="col-md-1-10">
+<h3>Patient Details</h3>
+</div>
+<div class="col-sm-2">
+<a class="btn btn-sm btn-success" href="{{ route('Patient.create') }}">Add new data</a>
+</div>
+</div>
+@if($message = Session::get('success'))
+<div class="alert alert-success">
+<p>{{$message}}</p>
+</div>
+@endif
+<table class="table table-hover table-sm">
+<tr>
+<th width="50px"><b>No.</b></th>
+<th width="200px"><b>Name</b></th>
+<th width="200px"><b>Phone Number</b></th>
+<th>Doctor</th>
+<th width="180px">Action</th>
+</tr>
+@foreach ($patients as $patient)
+<tr>
+<td><b>{{++$i}}</b></td>
+<td><b>{{$patient->name}}</b></td>
+<td><b>{{$patient->date}}</b></td>
+<td><b>{{$patient->doctor->name}}</b></td>
+<td>
+<form class="" action="{{ route('Patient.destroy',$patient->id) }}" method="post">
+<a class="btn btn-sm btn-warning" href="{{route('Patient.edit',$patient->id)}}">Edit</a>
+@csrf
+@method('DELETE')
+<button type="submit" class="btn btn-sm
+btn-danger">Delete
+</button>
+</form>
+</td>
+</tr>
+@endforeach
+</table>
+{!! $patients->links() !!}
+</div>
+@endsection
+
+edit.blade.php(patient)
+@extends('layouts.app')
+@section('content')
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<h3>Edit Data</h3>
+</div>
+</div>
+<!-- @if ($errors->any())
+<div class="alert alert-danger">
+<strong>Oops!</strong>Input Error<br>
+<ul>
+@foreach ($errors as $error)
+<li>{{$error}}</li>
+@endforeach
+</ul>
+</div>
+@endif -->
+<form action="{{route('Patient.update',$patient->id)}}" method="post">
+@csrf
+@method('PUT')
+<div class="row">
+<div class="col-md-12">
+<strong>Patient Name: </strong>
+<input type="text" name="name" class="form-control  @error('name') {{'is-invalid'}} 
+@enderror" value="{{$patient->name}}">@error('name') <div class="invalid-
+feedback">{{$message}}</div> @enderror
+</div>
+<div class="form-group">
+                    <label for="doctor_id">Doctor: </label>
+                    <select class="form-control @error('doctor_id') {{'is-invalid'}} @enderror" 
+name="doctor_id" id="doctor_id">
+                      <option value="">Select doctor</option>
+                      @foreach($doctors as $doctor)
+                        <option value="{{$doctor->id}}" @if(old('doctor_id')==$doctor->id) 
+{{'selected'}} @endif>{{$doctor->name}}</option>
+                      @endforeach
+                    </select>
+                    @error('doctor_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+                  </div>
+<div class="col-md-12">
+<strong>Number: </strong>
+<input type="number" name="date" class="form-control  @error('date') {{'is-invalid'}} 
+@enderror" value="{{$patient->date}}">@error('date') <div class="invalid-
+feedback">{{$message}}</div> @enderror
+</div>
+<div class="col-md-12"><br>
+<a href="{{route('Patient.index')}}" class="btn btn-sm
+btn-success">Back</a>
+<button type="submit" class="btn btn-sm
+btn-primary">submit</button>
+</div>
+</div>
+</form>
+</div>
+@endsection
+
+Contact.blade.php
+@extends('layouts.site')
+@section('title','| Contact')
+@section('content')
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Contact</h1>
+      <p class="lead">Write us a letter or reach to us.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Write us to:</h3>
+        <p>Lorem Ipsum,<br/>is simply dummy text,<br/>of the printing.</p>
+      </div>
+      <div class="col-md-6">
+        <h3>Contact Form</h3>
+        <form>
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" id="" placeholder="Name">
+          </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input type="email" class="form-control" id="" aria-describedby="emailHelp" 
+placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email 
+with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <textarea></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+@endsection
+
+Home.blade.php
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+          @if (session('status'))
+              <div class="alert alert-success" role="alert">
+                  {{ session('status') }}
+              </div>
+          @endif
+            <div class="card">
+                <div class="card-header">
+                  Dashboard <span class="float-right">{{Session::get('uname')}}</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-deck">
+                    <div class="card border-primary">
+                      <div class="card-body" style="padding:0;"><p style="margin:0;font-
+size:5rem;text-align:center">{{ $doctor_count }}</p></div>
+                      <div class="card-footer text-primary" style="padding:0;">
+                        <a href="{{ route('Doctor.index') }}" class="btn btn-block">Doctors</a>
+                      </div>
+                    </div>
+                    <div class="card border-primary">
+                      <div class="card-body" style="padding:0;"><p style="margin:0;font-
+size:5rem;text-align:center">{{ $patient_count }}</p></div>
+                      <div class="card-footer text-primary" style="padding:0;">
+                        <a href="{{ route('Patient.index') }}" class="btn btn-block">Patients</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+Patients.blade.php
+@extends('layouts.site')
+@section('title','| Patients')
+@section('sidebar')
+  <div class="col-md-3">
+    <h5>Doctors:</h5>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="{{ route('patients') }}">{{ __('All') }}</a></li>
+      @forelse($doctors as $doctor)
+        <li class="list-group-item"><a href="{{ route('patients.doctor',$doctor-
+>id) }}">{{ $doctor->name }}</a></li>
+      @empty
+        <p>No doctors found.</p>
+      @endforelse
+    </ul>
+  </div>
+@endsection
+@section('content')
+  <div class="col-md-9">
+    <h5>Patients: @isset($curDoctor) {{ '('.$curDoctor->name.')' }} @endisset</h5>
+    <div class="card-columns">
+    @forelse($patients as $patient)
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ $patient->name }} <span class="badge badge-pill badge-
+primary  float-right">{{ $patient->doctor->name }}</span></h5>
+          <p class="card-text">Number {{ $patient->date }}</p>
+        </div>
+      </div>
+    @empty
+      <p>No patients found.</p>
+    @endforelse
+    </div>
+    {{ $patients->links() }}
+  </div>
+@endsection
+
+welcome.blade.php
+ @extends('layouts.site')
+@section('title','| Home')
+@section('content')
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4" style="font-size: 58px"><strong>Home</strong></h1>
+      <p class="lead" style="font-size: 20px">This is a home page of the Doctor Management 
+application. This website lists all the patients available to an individual doctor.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <br><br>
+        <h3 style="font-size: 30px"><strong>What is the role of Doctor's 
+Table?</strong></h3>
+        <p style="font-size: 25px">It contains names of each doctor with their respective fields
+ of operation in surgery. It displays total number of patients assigned under individual doctor.</p>
+<br><br><br>
+        <h3 style="font-size: 30px"><strong>What is the role of Patient's 
+Table?</strong></h3>
+        <p style="font-size: 25px">It contains names of each patient with their respective 
+numbers. The patients can choose doctors which doctors are listed in a dropdown manner 
+fetched from the Doctor table.</p>
+      </div>
+    </div>
+  </div>
+@endsection
