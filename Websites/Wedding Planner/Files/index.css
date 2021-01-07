@@ -1,0 +1,22 @@
+
+body {
+  margin: 0;
+}
+
+/*****************************CONTENT*******************/
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(1, 0.5, 0.5, 0.5);
+  width: 350px;
+  padding: 20px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+  font-family: 'Lora';
+  letter-spacing: 2.5px;
+  font-color:black;
+}
+
+
+

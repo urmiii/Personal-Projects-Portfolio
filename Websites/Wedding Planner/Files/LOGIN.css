@@ -1,0 +1,130 @@
+<style>
+
+h1, p{ margin: 0; }
+
+body {
+  margin:0;
+}
+
+#container {
+
+  position: relative;
+  left: 80px;
+}
+
+
+#container .one {
+  background: url(anu2.jpg);
+  height:580px;
+  font-family: Cormorant Garamond;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 5em;
+  left: 0;
+  line-height: 95%;
+  padding-top: 20px; 
+  position: absolute; 
+  text-align: right;
+  top: -08px;
+  margin-left: -40px;
+  width: 60%;
+
+}
+
+#container .two {
+  background: url(anu2.jpg);
+  font-size: 5em;
+  font-family: Cormorant Garamond; 
+  left: 470px;
+  line-height: 95%;
+  padding-top: 20px;
+  padding-left:370px; 
+  position: absolute; 
+  text-align: center;
+  top: -08px;
+  width: 9%;
+  text-fill-color: transparent; 
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent; 
+  -moz-background-clip: text;
+}
+
+form{
+  text-align: center;
+  position: absolute;
+  top: 350px;
+  left: 820px;
+  font-size: 22px;
+  color: white;
+  right: 20px;
+}
+
+label{
+  display: block;
+  letter-spacing: 4px;
+  padding-top: 8px;
+  text-align: center;
+}
+.label-text{
+  color: gray;
+  cursor: text;
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  +transform(translateY(-34px));
+  transition: all 0.3s;
+}
+
+input{
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #4A4A4A;
+  color: gray;
+  font-size: 36px;
+  letter-spacing: -1px;
+  outline: 0;
+  padding: 5px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  width: 200px;
+}
+input:focus {
+  max-width: 100%;
+  width: 400px;
+}
+input + .label-text{
+  color:#4A4A4A;
+  font-size: 18px;
+  +transform(translateY(-74px));
+}
+input:valid + .label-text{
+  font-size: 13px;
+  +transform(translateY(-74px));}
+
+  button{
+    background-color: #333333;
+    border: 2px solid #ECF3F3;
+    border-radius: 27px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    transition: all 200ms;
+
+  }
+  button:hover, button:focus{
+    background-color: #ECF3F3;
+    color: #333333;
+    outline: 0;}
+
+
+    span:hover{
+     background-color: #ededed;
+     cursor: pointer;
+   }
+
+</style>

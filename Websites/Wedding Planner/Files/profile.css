@@ -1,0 +1,141 @@
+/********************************************YOUR PROFILE********************************************/
+h1, p,body { margin: 0; }
+
+#container {
+	margin-top: 30px;
+	margin-left: 140px;
+	position: relative;
+}
+
+#container .one {
+	/* has same bg as #container */
+	background: url(purps.jpg);
+	height: 147px;
+	background-repeat: no-repeat;
+	color: white;
+	font-size: 8em;
+	margin-left: 20px;
+	line-height: 100%;
+	padding-top: 25px; /* padding + border of div */
+	position: absolute; /* position at top left of #containter to sync bg */
+	text-align: right;
+	top: -08px   ;
+	margin-left: -58px;
+	width: 50%;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	font-family: 'Quicksand';
+	font-weight: 520;
+	letter-spacing: 4px;
+	margin-bottom: 36px;
+}
+
+#container .two {
+	/* has same bg as #container */
+	background: url(purps.jpg);
+	text-transform: uppercase;
+	font-size: 8em;
+	font-family: "Arial Black", Gadget, sans-serif;
+	left: 295px;
+	line-height: 100%;
+	padding-top: 25px;
+	padding-left: 280px; /* padding + border of div */
+	position: absolute; /* position at top left of #containter to sync bg */
+	text-align: center;
+	top: -8px;
+	width: 60%;
+	font-family: 'Quicksand';
+	font-weight: 530;
+	letter-spacing: 4px;
+	margin-bottom: 36px;
+	text-fill-color: transparent; /* not yet supported */
+	background-clip: text; /* not yet supported */
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-moz-text-fill-color: transparent; /* not yet supported */
+	-moz-background-clip: text; /* not yet supported */
+	/* text-shadow: 5px 5px 0px rgba(0,0,0,0.1); */
+}
+form {
+	margin-top: 500px;
+	padding: 20px;
+	margin: 0 auto;
+	max-width: 600px; 
+}
+
+form {
+	padding-bottom: 10px;
+	margin-bottom: 25px;
+	font-family: 'Open Sans';
+	font-weight: 100;
+	text-align: center;
+}
+
+.row {
+	margin-bottom: 25px;
+	position: relative;
+	overflow: hidden;
+}
+
+input[type="text"], textarea {
+
+	width: 100%;
+	height: 40px;
+	padding: 10px 10px 10px 90px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	color: #333;
+	border-radius: 3px;
+	transition: all 0.3s;
+}
+
+input[type="text"] + label, textarea + label {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+	font-weight: bold;
+	width: 80px;
+	text-shadow: 0 0 2px rgba(0,0,0,0.1);
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	color: white;
+	background: #500A0E;
+	border-radius: 3px 0 0 3px;
+	transition: all 0.3s ;
+	transform: translateZ(0) translateX(0);
+}
+
+input[type="text"]:focus + label {
+	transform: translateZ(0) translateX(-100%);
+}
+
+textarea:focus + label {
+	transform: translateZ(0) translateY(-100%);
+}
+
+button {
+	position: relative;
+	overflow: hidden;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0 0 2px rgba(0,0,0,0.1);
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	color: white;
+	border: none;
+	background: #500A0E;
+	border-radius: 3px;
+	transition: all 0.3s;
+	transform: translateZ(0) translateX(0);
+	z-index: 2;
+	cursor: pointer;
+}  

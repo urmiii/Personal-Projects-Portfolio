@@ -1,0 +1,105 @@
+/********************************************OUR STORY********************************************/
+h1, p, body { margin: 0; }
+
+#container {
+  margin-top: 30px;
+  margin-left: 140px;
+  position: relative;
+}
+
+#container .one {
+  /* has same bg as #container */
+  background: url(purps.jpg);
+  height: 147px;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 8em;
+  margin-left: 20px;
+  line-height: 100%;
+  padding-top: 25px; /* padding + border of div */
+  position: absolute; /* position at top left of #containter to sync bg */
+  text-align: right;
+  top: -08px   ;
+  margin-left: -58px;
+  width: 55%;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: 'Quicksand';
+  font-weight: 520;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+}
+
+#container .two {
+  /* has same bg as #container */
+  background: url(purps.jpg);
+  text-transform: uppercase;
+  font-size: 8em;
+  font-family: "Arial Black", Gadget, sans-serif;
+  left: 295px;
+  line-height: 100%;
+  padding-top: 25px;
+  padding-left: 210px; /* padding + border of div */
+  position: absolute; /* position at top left of #containter to sync bg */
+  text-align: center;
+  top: -8px;
+  width: 65%;
+  font-family: 'Quicksand';
+  font-weight: 530;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+  text-fill-color: transparent; /* not yet supported */
+  background-clip: text; /* not yet supported */
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent; /* not yet supported */
+  -moz-background-clip: text; /* not yet supported */
+  /* text-shadow: 5px 5px 0px rgba(0,0,0,0.1); */
+}
+
+.content1 {
+  position: fixed;
+  bottom: 0;
+  background-color: #1111;
+  width: 55%;
+  padding: 20px;
+  margin-left: 30%;
+  margin-bottom: 15%;
+
+  font-size: 15px;
+  letter-spacing: 2.5px;
+       color: #5c7f71;
+             font-family: 'Lora';
+  
+}
+
+.content2 {
+  position: fixed;
+  bottom: 0;
+    background:rgba(231, 68, 210, 0.44);
+
+  width: 45%;
+  padding: 20px;
+  margin-left: 5%;
+  margin-bottom: 6%;
+ color: #5c7f71;
+  font-size: 15px;
+  letter-spacing: 2.5px;
+        font-family: 'Lora';
+  
+}
+
+.content3 {
+  position: fixed;
+  bottom: 0;
+  background-color:#e5e7e5;
+  width: 45%;
+  padding-left:10px;
+  margin-left: 46.5%;
+  margin-bottom: 3%;
+      font-family: 'Lora';
+  letter-spacing: 2.5px;
+   color: #5c7f71;
+  
+}
+

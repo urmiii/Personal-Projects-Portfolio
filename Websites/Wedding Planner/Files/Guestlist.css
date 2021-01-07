@@ -1,0 +1,60 @@
+/********************************************YOUR PROFILE********************************************/
+h1, p ,body { margin: 0; }
+
+#container {
+  margin-top: 30px;
+  margin-left: 140px;
+  position: relative;
+}
+
+#container .one {
+  /* has same bg as #container */
+  background: url(purps.jpg);
+  height: 107px;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 7em;
+  margin-left: 20px;
+  line-height: 100%;
+  padding-top: 25px; /* padding + border of div */
+  position: absolute; /* position at top left of #containter to sync bg */
+  text-align: right;
+  top: -08px   ;
+  margin-left: -58px;
+  width: 55%;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: 'Quicksand';
+  font-weight: 520;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+}
+
+#container .two {
+  /* has same bg as #container */
+  background: url(purps.jpg);
+  text-transform: uppercase;
+  font-size: 7em;
+  font-family: "Arial Black", Gadget, sans-serif;
+  left: 295px;
+  line-height: 100%;
+  padding-top: 25px;
+  padding-left: 130px; /* padding + border of div */
+  position: absolute; /* position at top left of #containter to sync bg */
+  text-align: center;
+  top: -8px;
+  width: 65%;
+  font-family: 'Quicksand';
+  font-weight: 530;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+  text-fill-color: transparent; /* not yet supported */
+  background-clip: text; /* not yet supported */
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent; /* not yet supported */
+  -moz-background-clip: text; /* not yet supported */
+  /* text-shadow: 5px 5px 0px rgba(0,0,0,0.1); */
+}
+
+ 

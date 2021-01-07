@@ -1,0 +1,85 @@
+body{
+    margin: 0;
+}
+
+.venue_left{
+    padding-top: 130px;
+    padding-left: 100px;
+    padding-right: 50px;
+}
+
+
+.one_left{
+    
+    font-size: 20px;
+	   letter-spacing: 0.05em;
+    color: #313131;
+}
+.two_left{
+        
+	font-size: 30px;
+    line-height: 45px;
+    font-family: "bree-serif",serif;
+    text-transform: uppercase;
+    color: #313131;
+   
+}
+
+.bigbutton{
+	margin-top: 15px;
+    padding: 0 60px;
+    display: inline-flex;
+    min-height: 60px;
+    line-height: 56px;
+    color: #313131;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-family: "bree-serif",serif;
+    font-weight: 300;
+    z-index: 1;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    background-color: #1a171b;
+    overflow: hidden;
+    position: relative;
+    vertical-align: baseline;
+    background-color:  #a59f93;
+}
+
+.venue_right{
+    padding-top: 150px;
+    padding-right: 100px;
+    padding-left: 100px;
+}
+
+.one_right{
+    
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    color: #313131;
+
+}
+
+.two_right{
+    padding-top: 10px;
+    font-size: 30px;
+    line-height: 45px;
+    font-family: "bree-serif",serif;
+    text-transform: uppercase;
+    color: #313131;
+}
+
+.content1 {
+  position: relative;
+  bottom: 0;
+  background-color: rgba(240, 90, 90, 0.41);
+  width: 50%;
+  padding: 20px;
+  margin-left: 30%;
+  margin-bottom: 21%;
+  font-family:'Comic Sans MS';
+  font-size: 15px;
+  letter-spacing: 2.5px;
+  
+}
+

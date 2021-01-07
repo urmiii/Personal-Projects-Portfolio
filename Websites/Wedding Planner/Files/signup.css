@@ -1,0 +1,131 @@
+body { width: 100%; margin:0;  font-family: 'Open Sans', Helvetica;}
+
+h1, p { margin: 0; }
+
+#container {
+
+  position: relative;
+  left: 80px;
+  top: 35px;
+}
+
+
+#container .one {
+  background: url(food2.jpg);
+  height:580px;
+  font-family: Cormorant Garamond;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 5em;
+  left: 0;
+  line-height: 95%;
+  padding-top: 40px; 
+  position: absolute; 
+  text-align: right;
+  top: -10px;
+  margin-left: -58px;
+  width: 55%;
+
+}
+
+#container .two {
+  background: url(food2.jpg);
+  font-size: 5em;
+  font-family: Cormorant Garamond; 
+  left: 470px;
+  line-height: 95%;
+  padding-top: 40px;
+  padding-left:280px; 
+  position: absolute; 
+  text-align: center;
+  top: -10px;
+  width: 11%;
+  text-fill-color: transparent; 
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent; 
+  -moz-background-clip: text;
+}
+
+  form
+  {
+    display: block;
+    margin-top: 170px;
+    width: 470px;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 5px;
+    font-size: 0;
+    margin-left: 810px;
+    margin-bottom: 0px;
+  }
+
+  form > div
+  {
+    display: inline-block;
+    width: 100%;
+  }
+
+  form > div > label
+  {
+    display: block;
+    padding: 20px 20px 10px;
+    vertical-align: top;
+    font-family: 'Open Sans', Helvetica;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4A4A4A;
+    cursor: pointer;
+
+  }
+
+  form > div.col-2, form > div.col-3, form > div.col-4 { box-shadow: 1px 1px #E4E4E4 }
+
+  form > div.col-2 { width: 50% }
+  form > div.col-3 { width: 50% }
+  form > div.col-4 { width: 100% }
+  form > div.col-5 { width: 50% }
+
+
+  form > div > label > input
+  {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 27px;
+    line-height: 27px;
+    margin: 5px -5px 0;
+    padding: 7px 5px 3px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 200;
+    opacity: .66;
+    transition: opacity .3s;
+  }
+
+
+  .button > input[type=submit] {
+    width: 100%;
+
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius:7px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: Bebas Neue;
+  }
+
+  .button > input[type=submit]:hover {
+    background-color: gray;
+    text-transform: uppercase;
+
+  }
+

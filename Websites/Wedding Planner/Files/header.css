@@ -1,0 +1,74 @@
+<style>
+
+body{
+	margin: 0;
+	overflow-x:hidden;
+	
+}
+
+.head{
+	margin-left: 0px;
+}
+
+nav {
+	height: 8vh;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	padding-left: 58px;
+}
+
+nav, ul {
+	display: flex;
+	align-items: center;
+}
+
+body .header{
+	font-family: 'Lora';
+
+}
+
+li {
+
+	list-style: none;
+	margin: 0 5% 0 0;
+	padding: 8px 2px 8px 0.5px;  
+}
+
+
+ul > .head{
+	justify-content: flex-start;
+}
+
+
+ul  {
+	justify-content: flex-end;
+	width: 100%;
+
+}
+
+a:link,
+a:visited {
+	color: #666;
+	text-decoration: none;
+}
+
+li:hover {
+	color: #6d6d6d;
+	opacity: 0.5;
+}
+
+h1 {
+	color: #6d6d6d;
+	font-family: 'Cormorant Garamond';
+	font-size: 38px;
+	font-weight: 450;
+	line-height: 72px;
+	letter-spacing: 15.5px;
+	text-align: left;
+	padding-left: 0px;
+	text-indent: 24px;
+	margin-left: -77px;
+	justify-content: flex-start;
+}
+</style>
