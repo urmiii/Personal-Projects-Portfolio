@@ -12,4 +12,4 @@ This project is created using Python libraries such as seaborn, matplotlib, nump
 
 4. Comparing the individual campaign performance so the best creative/campaign can be run again with adjusted audiences. 
 
-*Any improvement or feedback is welcom
+*Any improvement or feedback is welcome*
