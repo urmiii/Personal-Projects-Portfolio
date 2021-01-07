@@ -1,6 +1,6 @@
 # EZCLean
 
-This desktop application allows the user to clean the given data withthe click of a button. Major features included are removing dataredundancy, outliers, and null value analysis/operations. It allows to load a .csv type file and perform data cleaning operations, which can be later exported in csv format at the same location.
+This desktop application allows the user to clean the given data with the click of a button. Major features included are removing data redundancy, outliers, and null value analysis/operations. It allows to load a .csv type file and perform data cleaning operations, which can be later exported in csv format at the same location.
 
 # Features
 📊 Handling Null Values
