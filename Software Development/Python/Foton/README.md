@@ -1,5 +1,5 @@
 # Foton
-This project will provide automatic grouping of images based on similar characteristics along with additional features. AIMG focuses on kmeans algorithm for the classification of images into groups. The desktop application has been created majorly using PyQT5 for GUI, OpenCV for Image Processing, KNN for Classification. 
+This project will provide automatic grouping of images based on similar characteristics along with additional features. Foton focuses on kmeans algorithm for the classification of images into groups. The desktop application has been created majorly using PyQT5 for GUI, OpenCV for Image Processing, KNN for Classification. 
 
 # Features
 📷 Capture Image dataset via webcam 
