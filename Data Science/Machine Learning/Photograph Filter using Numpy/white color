@@ -1,0 +1,12 @@
+%matplotlib inline
+import numpy as np
+import scipy as misc
+import matplotlib.pyplot as plt
+import imageio
+
+photo_data = imageio.imread('./wifire/urmi.jpg')
+plt.figure(figsize=(15,10))
+photo_data[200:800, :] = 255 # all three colors are fully intesified from row
+#200 to 800(white)
+plt.figure(figsize=(10,10))
+plt.imshow(photo_data)

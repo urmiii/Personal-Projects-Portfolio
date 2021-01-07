@@ -1,0 +1,14 @@
+%matplotlib inline
+import numpy as np
+import scipy as misc
+import matplotlib.pyplot as plt
+import imageio
+
+photo_data = imageio.imread('./wifire/urmi.jpg')
+plt.figure(figsize=(15,10))
+#photo_data = imageio.imread('./wifire/urmi.jpg')
+photo_data[200:800, : ,1] = 255 #row 200 to 800 green value is intensified
+#play with row and column numbers to get the green color effect in the entire image
+plt.figure(figsize=(10,10))
+plt.imshow(photo_data)
+

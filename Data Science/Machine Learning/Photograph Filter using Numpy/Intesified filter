@@ -1,0 +1,20 @@
+%matplotlib inline
+import numpy as np
+import scipy as misc
+import matplotlib.pyplot as plt
+import imageio
+
+photo_data = imageio.imread('./wifire/urmi.jpg')
+plt.figure(figsize=(15,10))
+photo_data = imageio.imread('./wifire/urmi.jpg')
+#print("Shape of photo_data:", photo_data.shape)
+low_value_filter = photo_data < 70
+#you can change the value from 70 to any number to change the intensity of the filter on your image
+#print("Shape of low_value_filter:", low_value_filter.shape)
+#import random
+plt.figure(figsize=(10,10))
+plt.imshow(photo_data)
+photo_data[low_value_filter] = 0
+plt.figure(figsize=(10,10))
+plt.imshow(photo_data)
+#the second image filtered out pixels with values less than 70
