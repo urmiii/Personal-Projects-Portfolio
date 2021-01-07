@@ -4,9 +4,14 @@ This desktop application allows the user to clean the given data withthe click o
 
 # Features
 📊 Handling Null Values
+
 ⚖️ Reformating Values
+
 🪂 Dropping Features and Values
+
 🎯 Removing Inconsistencies
+
+🦆 Removing Outliers
 
 # Notes
 Run main.py
