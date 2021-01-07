@@ -1,1 +1,1 @@
-*Contains source codes to the desktop application*
+*Contains source codes and ui files to the desktop application*
