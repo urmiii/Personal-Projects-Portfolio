@@ -15,6 +15,7 @@ This desktop application allows the user to clean the given data withthe click o
 
 # Notes
 Run main.py
+
 Files ez2.py (main window) and ui_splash_screen.py (loading screen) is integrated in the main.py
 
 # To-do
