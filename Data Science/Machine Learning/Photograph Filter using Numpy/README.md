@@ -3,7 +3,9 @@ This is a collection of various tools, such as filters, effects, and editing opt
 
 # Features
 🎨 Color filters such as Green, Black, and White
+
 🖼️ Intesified filters
+
 ✂️ Cropping tool
 
 # Notes
