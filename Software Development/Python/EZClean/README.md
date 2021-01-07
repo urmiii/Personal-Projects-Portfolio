@@ -15,4 +15,4 @@ Files ez2.py (main window) and ui_splash_screen.py (loading screen) is integrate
 # To-do
 ~> Convert py to exe using Py2Exe
 
-
+*Any improvement or feedback is welcome!*
