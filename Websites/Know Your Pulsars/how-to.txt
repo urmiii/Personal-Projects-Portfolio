@@ -1,0 +1,3 @@
+Step 1 :- cd folderlocation
+Step 2 :- python filename.py
+Step 3 :- htpp://127.0.0.1:5000/
