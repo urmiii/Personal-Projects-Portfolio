@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+<body>
+<!---------------------------------------------frontend style-------------------------------------------------->
+<style type="text/css">
+	.flex-container{
+		 display: flex;
+	}
+
+	 .flex-container > span{
+            background-color:rgba(194, 194, 214, 0.1);
+            margin: 10px;
+            margin-left: 700px;
+            padding: 20px;
+            
+        }
+
+     .flex-container1 > span{
+     	background-color:rgba(194, 194, 214, 0.1);
+            margin: 10px;
+            margin-left: 700px;
+            padding: 10px;
+     }
+
+	body{
+	background-color : #000;
+	}
+
+	span{
+	    display:inline-block;
+	    position:relative;
+	    margin:10px;
+	    padding:4px;
+	    width:450px;
+	    line-height: 18px;
+	    user-select: none;
+	    -moz-user-select: none;
+	    -webkit-user-select: none;
+	    -ms-user-select: none;
+	    cursor: default;
+	    background-color:rgba(194, 194, 214, 0.0);
+	    border-radius:5px;
+	    border-color: rgb(194, 194, 214);
+	    font-family: 'DotGothic16', sans-serif;
+	    font-size: 25px;
+	    color: white; 
+	    text-align: center;
+	}
+
+.head2{
+		font-size: 20px;
+	}
+
+.dt{
+  text-decoration: none;
+  text-transform:uppercase;
+  color: #000;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  font-size: 12px;
+  padding: 10px;
+  border: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: box-shadow .2s ease-in-out, background .2s ease-in-out, color .2s ease-in;
+}	
+
+.browse{
+  text-decoration: none;
+  text-transform:uppercase;
+  color: #000;
+  background-color: #ddbea9;
+  outline: none;
+  font-size: 10px;
+  border: 2px solid #000;
+  padding: 08px;
+  border-radius: 10%;
+  font-weight: bold;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
+  transition: box-shadow .2s ease-in-out, background .2s ease-in-out, color .2s ease-in;
+  filter: drop-shadow(1px 5px 2px #eae2b7);
+}
+
+.btn{
+  text-decoration: none;
+  text-transform:uppercase;
+  color: #000;
+  background-color: #ddbea9;
+  outline: none;
+  font-size: 10px;
+  border: 2px solid #000;
+  padding: 08px;
+  border-radius: 10%;
+  font-weight: bold;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
+  transition: box-shadow .2s ease-in-out, background .2s ease-in-out, color .2s ease-in;
+  filter: drop-shadow(1px 5px 2px #eae2b7);
+}
+
+
+</style>
+
+
+<script type="text/javascript">
+    (function () {
+
+
+
+    var n = 1500;
+
+    var a = [],y = [],x = [],s = [],strs = [],
+    d = document,
+    cols = ['#9db4ff', '#a2b9ff', '#a7bcff', 
+    '#aabfff', '#afc3ff', '#baccff', '#c0d1ff', 
+    '#cad8ff', '#e4e8ff', '#edeeff', '#fbf8ff', 
+    '#fff9f9', '#fff5ec', '#fff4e8', '#fff1df', 
+    '#ffebd1', '#ffd7ae', '#ffc690', '#ffbe7f', 
+    '#ffbb7b', '#ffbb7b', '#fff', '#fff'];
+
+    var container = d.createElement('div');
+    container.setAttribute('style','display:block;'
+    +'position:fixed;'
+    +'height:100%;width:100%;'
+    +'margin:auto;padding:0px;'
+    +'top:0;left:0;left:0;right:0;'
+    +'background-color:transparent;' 
+    +'overflow:hidden;');
+    d.body.appendChild(container);
+
+    for (var i = 0; i < n; i++){
+        var col = cols[Math.random() * cols.length | 0];
+        strs[i] = d.createElement('div');
+        strs[i].setAttribute('style', 'display:block;'
+        +'position:absolute;' 
+        +'border-radius:50%;'
+        +'background-color:#fff;'
+        +'box-shadow: 0 0 12px 1.2px '+col+';');
+    container.appendChild(strs[i]);
+    }
+
+    function gen() {
+        for (var i = 0; i < n; i++) {
+            var r = Math.random() * 100 | 0;
+            var cen = (r == 0)? 2.3 : 0.7;
+            a[i] = Math.random() * Math.PI * 2;
+            y[i] = 50 + Math.random() * 50 / cen * Math.sin(a[i]);
+            x[i] = 50 + Math.random() * 50 / cen * Math.cos(a[i]);
+            s[i] = 0.4 + Math.random() * 2;
+            strs[i].style.transform = 'translate3d('+x[i]+'vw, '+y[i]+'vh, 0)';
+            strs[i].style.width = (strs[i].style.height = (s[i]) + 'px');
+            strs[i].style.opacity = s[i] / 3;
+        }
+    }
+
+    window.addEventListener("load",gen,false);
+})();
+</script>
+
+<!--------------------------------------orbital speed and distance--------------------------------------->
+<div class="flex-container">
+<span class="span1">
+<form method="POST">
+<h1 style="font-size: 30px;"><u>Distance and Orbital Speed</u></h1><br>
+<p class="head2">
+Pick a Date: {{form.hidden_tag()}} 
+<input type="date" name="dt" class="dt" >  <br><input type="submit" class="btn" value="Submit">
+<br> <br><br><br>
+<b style="font-size: 18px;">For {{convt}}, the Ephemeris Time is:</b> <br><br> <u>{{et}}</u>
+<br> <br><br>
+<b style="font-size: 18px;">For {{convt}}, the distance in of Earth <br><br> and Sun in AU:</b> <u>{{EARTH_SUN_DISTANCE_AU}}</u>
+<br> <br> <br>
+<b style="font-size: 18px;">For {{convt}}, the orbital speed of earth <br> <br> around sun:</b> <u>{{EARTH_ORB_SPEED_WRT_SUN}}</u>
+	</form>
+</p>
+</span>
+</div>
+<br>
+<br>
+<!--------------------------------------PULSARS--------------------------------------------------------->
+<div class="flex-container1">
+<span class="span2">
+<h1 style="font-size: 30px;"><u>Let's Detect Pulsars</u><br><br> </h1>
+<font style="font-size: 20px;">Select file(s) to upload</font>
+<p class="head2">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<form method="POST" action="/uploader" enctype="multipart/form-data">
+    <dl>
+		<p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="files[]" multiple="true" autocomplete="off" required> <br><br> <input class="browse" type="submit" value="Submit to see results">
+		</p>
+    </dl>
+</form>
+
+
+<div>
+
+		<p>			
+			{% for data_element in data %}
+			<p>{{data}}</p>
+			{% endfor %}
+		</p>
+
+<br>
+<!-- Hello. <a href="/displayFile">Click me to see the results!.</a>-->
+</div>
+</p>
+</span>
+</div>
+
+</body>
+</html>
