@@ -15,7 +15,7 @@ The data to calculate distance, time, and speed is fetched from NASA's open data
 Some pulsars rotates once a second, some 10x a second, so we will be able to catch the image only when it is directly pulsating towards us. So, this project will combine n images and combine them. The output image will show the night sky with higher brighter intensity in order to highlight the pulsar signal more efficiently. 
 
 Open cmd to this project's path and enter following command,
-python basic2.py
+python basic.py
 
 
 *Any improvement or feedback is welcome!*
